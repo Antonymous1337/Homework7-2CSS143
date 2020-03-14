@@ -131,13 +131,6 @@ public class MaxHeap implements Heap {
             index = (index*2)+2;
         }
 
-        //                0
-        //               5 4
-        //             3 2 1
-
-
-
-
         return toReturn;
     }
 

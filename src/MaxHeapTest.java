@@ -122,7 +122,7 @@ public class MaxHeapTest {
 
         int howManyTests = 101;
         int minimumDataSize = 100;
-        int maximumDataSize = 100000;
+        int maximumDataSize = 10000000;
         int changeInDataSizePerTest = (maximumDataSize-minimumDataSize)/(howManyTests-1);
 
         int dataSize = minimumDataSize;
@@ -139,14 +139,14 @@ public class MaxHeapTest {
             MaxHeap NLogN = new MaxHeap(dataSize);
             MaxHeap N = new MaxHeap(dataSize);
 
-            long startTimeNLogN = System.nanoTime();
+            long startTimeNLogN = System.nanoTime()/1000000;
             NLogN.MaxHeapLogN(testArrayForNLogN);
-            long endTimeNLogN = System.nanoTime();
+            long endTimeNLogN = System.nanoTime()/1000000;
             long totalTimeNLogN = endTimeNLogN - startTimeNLogN;
 
-            long startTimeN = System.nanoTime();
+            long startTimeN = System.nanoTime()/1000000;
             N.MaxHeapN(testArrayForN);
-            long endTimeN = System.nanoTime();
+            long endTimeN = System.nanoTime()/1000000;
             long totalTimeN = endTimeN - startTimeN;
 
             if (totalTimeN > totalTimeNLogN)System.out.println("NOTICE N is " + (totalTimeN - totalTimeNLogN) + " bigger");
