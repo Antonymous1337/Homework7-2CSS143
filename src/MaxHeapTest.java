@@ -74,6 +74,7 @@ public class MaxHeapTest {
         testsNLogN = new MaxHeap(0);
         nums = new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
         testsNLogN.MaxHeapLogN(nums);
+        //printHeap(testsNLogN);
         expected = new Integer[]{20,  19, 13,  16, 18, 10, 12,  9, 15, 17, 7, 1, 5, 4, 11,   0, 6, 3, 14, 2, 8};
         assertTrue(testsNLogN.isEqualToArray(expected));
 
@@ -112,6 +113,7 @@ public class MaxHeapTest {
         testsN = new MaxHeap(0);
         nums = new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
         testsN.MaxHeapN(nums);
+        //printHeap(testsN);
         expected = new Integer[]{20,  19, 13,  16, 18, 10, 12,  9, 15, 17, 7, 1, 5, 4, 11,   0, 6, 3, 14, 2, 8};
         assertTrue(testsNLogN.isEqualToArray(expected));
 
@@ -120,9 +122,9 @@ public class MaxHeapTest {
     @Test
     public void timeNvsNLogN() {
 
-        int howManyTests = 101;
+        int howManyTests = 31;
         int minimumDataSize = 100;
-        int maximumDataSize = 10000000;
+        int maximumDataSize = 100000;
         int changeInDataSizePerTest = (maximumDataSize-minimumDataSize)/(howManyTests-1);
 
         int dataSize = minimumDataSize;
@@ -139,25 +141,31 @@ public class MaxHeapTest {
             MaxHeap NLogN = new MaxHeap(dataSize);
             MaxHeap N = new MaxHeap(dataSize);
 
-            long startTimeNLogN = System.nanoTime()/1000000;
+            long startTimeNLogN = System.nanoTime();
             NLogN.MaxHeapLogN(testArrayForNLogN);
-            long endTimeNLogN = System.nanoTime()/1000000;
+            long endTimeNLogN = System.nanoTime();
             long totalTimeNLogN = endTimeNLogN - startTimeNLogN;
 
-            long startTimeN = System.nanoTime()/1000000;
+            long startTimeN = System.nanoTime();
             N.MaxHeapN(testArrayForN);
-            long endTimeN = System.nanoTime()/1000000;
+            long endTimeN = System.nanoTime();
             long totalTimeN = endTimeN - startTimeN;
 
             if (totalTimeN > totalTimeNLogN)System.out.println("NOTICE N is " + (totalTimeN - totalTimeNLogN) + " bigger");
             System.out.println("Test #" + (i+1) + "; Data Size of " + dataSize + "\n" + "NLogN: " + totalTimeNLogN + "\nN: " + totalTimeN + "\n");
 
             dataSize += changeInDataSizePerTest;
+
+            testArrayForNLogN = null;
+            testArrayForN = null;
+            NLogN = null;
+            N = null;
         }
 
     }
 
     public void printHeap(MaxHeap heap) {
+        System.out.println();
         int countsTillLine = 1;
         int countsInLine = 0;
         for (int i = 0; i < heap.data.length; i++) {
